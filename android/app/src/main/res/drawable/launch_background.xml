@@ -1,0 +1,13 @@
+<!-- In your drawables directory -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:src="@drawable/background"
+            android:tileMode="repeat" />
+    </item>
+    <item>
+        <bitmap
+            android:src="@drawable/splash"
+            android:gravity="center" />
+    </item>
+</layer-list>

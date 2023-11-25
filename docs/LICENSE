@@ -1,0 +1,202 @@
+# End User Licence Agreement (EULA) for Conciel Software
+
+## I.  Subject of the licence
+
+1. Conciel AG ("Conciel") grants to the Customer a personal, non-transferable, nonassignable
+and non-exclusive license for personal use of the Conciel programs, applications, and modules
+("Conciel Software") duly acquired, registered and activated under the Customer's licence
+number/s. The Conciel Software covered by this licence also includes software updates,
+service packs and hotfixes of the Conciel Software acquired, registered, and activated by the
+Customer.
+2. In addition to the Conciel Software, the right of use also includes the corresponding
+documentation as well as the installation instructions, which Conciel provides free of charge or
+which have been acquired separately by the Customer.
+
+## II. Scope of the licence
+
+1. The Conciel Software is protected by copyright. All rights to the Conciel Software created by
+Conciel are held exclusively by Conciel.  
+2. The Customer is granted a non-exclusive right to use the Conciel Software licensed by them
+for their own business purposes; this right is unrestricted in geographical terms and in terms of time. The scope of the right of use - specifically with regard to number of users, multi-client capability and options - is determined by the respective licence model.  
+3. The Conciel Software licence covers the use of its functionalities, loading, accessing, using and displaying data generated from it. To the extent permitted by Conciel, any use via interfaces already integrated in the Conciel Software is also covered.
+4. If the Customer installs a later version of the Conciel Software ("Update"), they lose the right to continue using the old version no later than three months after installation. If the Customer wants to continue using the old version, an additional licence will have to be obtained for this purpose. Otherwise, the Customer shall ensure that the old version of the Conciel Software is no longer used after the expiry of the above-mentioned period. Conciel may verify this by monitoring the activations made by the Customer and request written confirmation from the Customer that the old version is no longer being used.
+5. The licence entitles the Customer to use a single installation of the Conciel Software on a
+single machine at the same time. "Machine" means as signifying any physical machine fitted
+with one or more processors (CPU), as well as any virtual machine or other type of emulated
+hardware environment.
+6. If the Customer wishes to have the Conciel Software installed on more than one machine at the
+same time, then each installation requires its own licence. This also applies to test systems
+unless the Customer has purchased a special licence that allows test installations in addition to a productive installation.
+7. The Customer acquires the licence exclusively for their own use. This means that only the
+Customer, their employees or persons commissioned by them can have access to the Conciel
+Software covered by the license.
+8. Unless Conciel has given its written consent, the Customer is not permitted to pass on Conciel Software in any form to third parties or to make it accessible to third parties. A third party may, however, access Conciel Software if and to the extent provided for by the licence model in question, and if a separate licence in the form of a subscription ("Subscription Licence") is acquired for the third party for this purpose. The scope of the rights of use of the third party and the use of the subscription is governed by the Customer's respective licence model and by the chosen subscription.
+9. Some licence models require a connection to the internet in order to use the available
+functions of the Conciel Software. The Customer bears the sole responsibility for an
+uninterrupted and secure connection to the internet when using the Conciel Software.
+10. Should the Customer wish to make the Conciel Software available online or remotely to other
+persons, legal entities or any other third parties for their own use, the Customer will require an additional licence in each instance and, where applicable, corresponding subscriptions. Third
+parties in this sense also include companies affiliated with the Customer as part of their group
+or in any other way.
+11. Any acts of exploitation of the personal licence that are not provided for in this Licence
+Agreement and fall outside of the licence model, in particular the renting out, lending and
+dissemination in tangible or intangible form, the use of the Conciel Software by or for third
+parties (e.g., by way of outsourcing, data-processing centre activities, application service
+providing, offering the Conciel Software as a service) and the granting of sub-licences are not
+permitted without prior written consent from Conciel. This also applies to the resale of the
+Conciel Software.
+12. Any third-party components and programs supplied by Conciel with the Conciel Software, such
+as databases, viewers and similar, are only licensed for use with the Conciel Software and
+may not be used by the Customer in any other context. The licensing terms of these third-party
+providers also apply in this regard. These third-party components and programs may also be
+subject to the terms of open-source software licences. A reference to this may be included in
+the documentation of the Conciel Software, or Conciel may provide the Customer with a list of
+third-party components and software for a specific version of the Conciel Software upon written
+request. The licence terms of these third-party providers may require Conciel to acknowledge
+the authors, to provide information in this regard or for the Conciel Software itself to contain
+this information.  
+13. The use of the Conciel Software is only granted on condition that the Customer assumes
+responsibility for full compliance with all relevant applicable export laws and regulations as well as sanction and embargo requirements. To the extent that any third-party components or
+software in the Conciel Software are subject to such restrictions, the Customer agrees to
+comply fully with all relevant applicable laws and regulations to ensure that the Conciel
+Software with the third party components and software is not exported in violation of such laws
+and regulations. The Customer is obliged to seek legal advice when exporting the Conciel
+Software in order to determine whether the relevant applicable laws and regulations are being
+complied with. The Customer shall indemnify Conciel for any breach by the Customer of such
+laws and regulations. Conciel may provide the Customer, upon written request, with a list of
+third-party components and software for a particular version of the Conciel Software.
+14. Some licence models allow the activation and use of additional services provided by third-party companies in return for payment or free of charge. In these cases, the Customer accepts the contractual terms of the respective third-party company applicable to the provision of the services. Conciel is neither a party to the contract nor obliged to provide the services of the thirdparty company, to maintain its connection or to offer any other warranty for the use of the services.  
+15. Conciel retains all rights to Conciel Software other than those expressly granted to the
+Customer in this Licence Agreement. This includes ownership rights, copyrights, designer
+rights, patent rights, trademark rights and all other protective rights in the Conciel Software,
+distribution rights, processing rights including rental and similar.
+
+## III. Terms of use
+
+1. The installation and configuration of the Conciel Software by the Customer or by third parties commissioned by the Customer shall by carried out on the Customer's own responsibility and at their own expense.
+2. The provision of the Conciel Software source code is not part of the license. The Customer
+may not modify the Conciel Software and, in particular, must not decompile it.
+3. The Customer may not circumvent the restriction of the scope of the licence by integrating
+proprietary program components in the Conciel Software. In particular, they are not entitled to
+expand the number of licensed users by programming their own user interface. If users enter
+or display data using an external interface that has been processed via online interfaces
+(SOAP, etc.), these users must be licensed.
+4. Conciel licences interfaces and report generators in order to export data from the Conciel
+Software to external systems, where it is then further processed for a primary purpose other
+than to view and analyse the data there. The use of interfaces and report generators with the
+primary purpose of visualising or printing the data by means of an external system is only
+permitted if a user of the external system is also registered as a user with Conciel.
+5. Contractual items, documents, proposals, test programs etc. of Conciel, which are made
+available to the Customer before or after the conclusion of the Licence Agreement, are
+deemed to be the intellectual property of Conciel as well as its business and trade secret. They
+must be treated confidentially and used only for the specified purposes.
+6. If the Customer purchases a licence for an industry solution that does not scale according to
+the number of users but according to another unit customary to this particular industry and that
+cannot be controlled by the Conciel Software (e.g., inhabitants, counter, beds, etc.), the
+Customer shall notify Conciel or the sales partner or contractor of any changes in this respect.
+7. The Customer shall take suitable measures to ensure that all persons who have access to the
+Conciel Software also comply with the obligations imposed on the Customer by this Licence
+Agreement. A breach of the Licence Agreement by such persons is also deemed to constitute
+a breach of this Licence Agreement.
+8. The Customer is allowed to make such backup copies of the Conciel Software as are required
+for a secure operation. The backup copies must, where technically feasible, be marked with
+the copyright notice of Conciel and stored securely. Existing copyright notices must not be
+deleted, altered or suppressed. Copies that are no longer needed must be deleted or
+destroyed. The online user manual within the Conciel Software may only be used for the
+Customer's own internal business purposes. Other documents provided by Conciel, such as
+course materials, are subject to separate provisions.
+9. Conciel undertakes to make available to every Customer interface information for the Conciel
+business objects, insofar as this is technically feasible and practicable.
+10. If the Conciel Software licensed by the Customer is damaged in whole or in part or accidentally deleted, it will be replaced by the Customer's sales partner or contractor or, if applicable, by Conciel, free of charge but subject to the reimbursement of expenses and outlays.
+11. Conciel ensures that the Conciel Software is supplied electronically in the form of downloads. The Customer is responsible for downloading the Conciel Software. Conciel may make the installation of the Conciel Software and the installation of updates, service packs, hotfixes and the use of subscriptions and other services conditional upon contractual maintenance or a similar agreement, activation and the acceptance of the applicable End User Licence Agreement (EULA) for Conciel Software, as amended from time to time. As part of the
+activation process, the licence number of the Customer, information about the system
+environment such as IP address, MAC address, server name and similar as well as details
+provided by the Customer (e.g., point of contact, subscribers) are automatically transferred to
+the Conciel servers. Conciel treats this information confidentially.
+12. Conciel also reserves the right to check compliance with the terms of the licence on an
+ongoing basis by means of voluntary information provided by the Customer or by logging the
+activations made at the Customer's premises and by a recognised audit firm (once a year).
+Conciel and the audit firm are required to safeguard the legitimate interests of the Customer
+and its trade secrets and maintain business continuity. The Customer shall duly support any
+audit. The Customer shall bear the reasonable costs should the audit reveal a use of the
+Conciel Software in contravention of the Licence Agreement and shall acquire the additional
+licences required since the start of use. Conciel reserves the right to assert further claims for damages or default interest.
+
+## IV. Procedure in the event of defects
+
+1. The restricted rights of use apply to the Conciel Software as supplied.
+2. Conciel warrants that the Customer's use of the Conciel Software in accordance with the
+Licence Agreement does not conflict with any rights of third parties ("Defects of Title"). In the event of Defects of Title, Conciel warrants that it will ensure that the end customer is able to use the Conciel Software or equivalent software, at the discretion of Conciel, in a legally sound manner.
+3. The Customer shall notify Conciel in writing without undue delay in the event that a third-party asserts a claim against them regarding any intellectual property rights (e.g., copyrights or patent rights) in the Conciel Software. The Customer hereby authorises Conciel to deal with all future disputes with third parties on its own. While Conciel avails itself of this authorisation, the Customer may not acknowledge any third-party claims without first obtaining the consent of Conciel. Conciel will defend itself against any third-party claims at its own expense provided that they are not attributable to conduct of the Customer or the end customers in breach of duty (e.g., the use of the Conciel Software in breach of contract).
+4. Conciel Software is of the customary quality expected for similar systems. It is not, however, faultless. A functional impairment of the Conciel Software, which is based either entirely or in part on hardware defects, environmental conditions, incorrect operation or similar does not constitute a defect. Any insignificant reduction in quality shall be disregarded.
+5. This Licence Agreement does not contain any warranty for defects of quality. Such warranty is
+only provided in separate contracts, usually between the Customer and their sales partner or
+contractor. Conciel, for its part, has laid down warranty provisions in its capacity as a software manufacturer vis-à-vis the Customer's sales partner or contractor.
+
+## V. Liability and disclaimer
+
+1. Any liability of Conciel in cases of warranty claims which exceeds the claims of the Customer
+set out in section 4 is - as far as legally permissible - excluded in its entirety. This applies, in particular, to any claims for loss or damage arising from strict liability.
+2. Conciel is only liable to the Customer for direct loss or damage, including from the use of the software, if the loss or damage is due to gross negligence or an intentional act.  
+3. Conciel disclaims all liability for slight negligence. Equally, Conciel disclaims all liability for its vicarious agents to the extent permitted by law.
+4. Liability for indirect loss or damage, for example indirect consequential loss or damage such as downtime costs, additional costs, loss of income or reputation, damage to reputation, other indirect losses such as the loss of parts of or all data, loss or damage due to business
+interruptions, of third parties or other loss or damage, unrealised savings, claims or
+consequential costs for expenses incurred by the Customer, or loss of profit is excluded to the
+extent permitted by law.
+5. In all other respects, the liability of Conciel is limited - to the extent permitted by law - to the purchase price of the licence, if applicable, otherwise to four times the recurring annual usage fees.
+6. Claims of the Customer shall lapse within 12 months.
+7. These limitations of liability - provided they are permitted by law - apply to both contractual and non-contractual claims.
+8. Conciel is not liable for any claims or any loss or damage arising from the use of third-party software or services that the Customer has activated or connected himself. The Customer is obliged to indemnify Conciel against all claims arising from the use of such a service and to compensate Conciel for any loss or damage incurred as a result of the Customer's use of a service.
+
+## VI. Term of Agreement and Termination
+
+1. Ownership of any supplied goods, and the restricted rights to use the Conciel Software, only
+pass to the Customer upon acceptance of this Licence Agreement. In the absence of an
+acceptance of this Licence Agreement, Conciel is entitled to require that the Customer return
+the supplied goods and submit written confirmation that these and all copies of the Conciel
+Software have been destroyed or deleted.
+2. The Licence Agreement is concluded for an indefinite period and comes into force upon
+activation of the licence. If the Customer uses the Conciel Software in accordance with the
+Licence Agreement, neither the Customer nor Conciel may terminate this Licence Agreement.
+3. However, if the Customer commits a considerable infringement of the Licence Agreement,
+specifically if they fail to observe the scope of the licence rights granted to them or infringes the intellectual property rights of Conciel, Conciel may terminate this Licence Agreement with immediate effect and without giving prior warning. In addition, Conciel may terminate this Licence Agreement with immediate effect after one single warning if the Customer does not pay the licence fees agreed with Conciel or a sales partner or contractor.
+4. Both parties reserve the right to terminate the agreement for good cause.
+5. A termination extends to all programs, applications and modules as well as to all rights of use granted for these.
+6. In the event of a termination of the Licence Agreement, the Customer shall not be entitled to
+any refund of payments. However, the Customer is obliged to stop using the Conciel Software,
+the corresponding documentation and installation instructions and to delete them and destroy
+all data carriers containing the Conciel Software. Upon request by Conciel, the Customer must
+confirm the destruction or deletion in writing.
+7. Existing contracts related to the Conciel Software (such as support/hotline,
+update/maintenance contracts for the Conciel Software and contracts for the Conciel City
+Services or subscription contracts) shall also end in the event of termination. The Customer
+shall fulfil its obligations arising from those contracts, and in particular their payment obligation, until the next possible regular termination date.
+8. The Customer is entitled at any time to waive their rights to use the Conciel Software granted herein. This shall not release the Customer from fulfilling or complying with existing obligations arising from this Licence Agreement or from other contracts related to the Conciel Software.
+9. Notice of termination must be given in writing.
+
+## VII. Final provisions
+
+1. This Licence Agreement supersedes any previous licence agreements entered into between
+Conciel and the Customer. The Customer is deemed to have accepted the latest version of the
+End User Licence Agreement (EULA) for Conciel Software, as amended from time to time. A
+new version shall also be deemed accepted if it is confirmed by the Customer or by a person
+appointed by the Customer during the installation of new program versions ("updates") of
+service packs or hotfixes.
+2. Existing amendments or supplements to this Licence Agreement agreed in writing between the
+Customer and Conciel shall remain valid even if there is a new version of the End User
+Licence Agreement (EULA) for Conciel Software.
+3. All rights of the Customer in relation to the Conciel Software and their claims against Conciel are laid down in this Licence Agreement. Any conflicting general terms and conditions of
+business or licence of the Customer are excluded.
+4. Additional or conflicting licence provisions are only valid if made in writing and signed with legal effect by both parties to the contract. This written form requirement also applies to any repeal or amendment of this clause.
+5. In the event that individual provisions of this License Agreement prove be invalid or null and void, this will not render the remaining provisions invalid or null and void. Instead, they shall be replaced by clauses that most closely reflect the economic purpose of the License Agreement. The same shall apply in the event of a gap in the License Agreement.
+6. The exclusive place of jurisdiction for all disputes arising out of or in connection with this Licence Agreement is the registered office of Conciel. However, Conciel is also entitled to bring a claim before the court with jurisdiction for the Customer's place of business.
+7. This Licence Agreement is governed by the laws of Switzerland to the exclusion of private
+international law and the Vienna Sales Convention.
+8. This Licence Agreement is available in German, English, French and Italian versions. In case
+of any discrepancies or contradictions, the German version shall prevail.
+
+## Acceptance of the End User Licence Agreement (EULA) for Conciel Software
+
+### Installation of Conciel Software by any person or corporation confirms compliance and acceptance of all terms and conditions, and agreement to all provisions of this Conciel Software licence
+
+End User Licence Agreement (EULA) for Conciel Software (c) 2023 Conciel AG, Version 07-2023

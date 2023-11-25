@@ -1,0 +1,456 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:concieltalk/config/app_config.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_callkeep/flutter_callkeep.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:matrix/matrix.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'package:concieltalk/utils/voip/voip_plugin.dart';
+import 'package:vrouter/vrouter.dart';
+
+class CallKeeper {
+  CallKeeper(this.callKeepManager, this.call) {
+    call.onCallStateChanged.stream.listen(_handleCallState);
+  }
+
+  CallKeepManager callKeepManager;
+  bool? held = false;
+  bool? muted = false;
+  bool connected = false;
+  CallSession call;
+
+  // update native caller to show what remote user has done.
+  void _handleCallState(CallState state) {
+    Logs().i('CallKeepManager::handleCallState: ${state.toString()}');
+    switch (state) {
+      case CallState.kConnecting:
+        Logs().v('callkeep connecting');
+        break;
+      case CallState.kConnected:
+        Logs().v('callkeep connected');
+        if (!connected) {
+          callKeepManager.answer(call.callId);
+        } else {
+          callKeepManager.setMutedCall(call.callId, false);
+          callKeepManager.setOnHold(call.callId, false);
+        }
+        break;
+      case CallState.kEnded:
+        callKeepManager.hangup(call.callId);
+        break;
+      /* TODO:
+      case CallState.kMuted:
+        callKeepManager.setMutedCall(uuid, true);
+        break;
+      case CallState.kHeld:
+        callKeepManager.setOnHold(uuid, true);
+        break;
+      */
+      case CallState.kFledgling:
+        // TODO: Handle this case.
+        break;
+      case CallState.kInviteSent:
+        // TODO: Handle this case.
+        break;
+      case CallState.kWaitLocalMedia:
+        // TODO: Handle this case.
+        break;
+      case CallState.kCreateOffer:
+        // TODO: Handle this case.
+        break;
+      case CallState.kCreateAnswer:
+        // TODO: Handle this case.
+        break;
+      case CallState.kRinging:
+        // TODO: Handle this case.
+        break;
+    }
+  }
+}
+
+Map<String?, CallKeeper> calls = <String?, CallKeeper>{};
+
+class CallKeepManager {
+  factory CallKeepManager() {
+    return _instance;
+  }
+
+  CallKeepManager._internal() {
+    _callKeep = CallKeep.instance;
+  }
+
+  static final CallKeepManager _instance = CallKeepManager._internal();
+
+  late CallKeep _callKeep;
+  VoipPlugin? _voipPlugin;
+
+//  String get appName => AppConfig.applicationName;
+
+  Future<bool> get hasPhoneAccountEnabled async {
+    final phonePermission = await Permission.phone.request().isGranted;
+    final readPhonePermission = await requestReadPhoneNumbersPermission();
+    return phonePermission && readPhonePermission;
+  }
+
+  final callSetup = <String, dynamic>{
+    'ios': {
+      'appName': AppConfig.applicationName,
+    },
+    'android': {
+      'alertTitle': 'Permissions required',
+      'alertDescription': 'Conciel needs to access your phone accounts',
+      'cancelButton': 'Cancel',
+      'okButton': 'ok',
+      // Required to get audio in background when using Android 11
+      'foregroundService': {
+        'channelId': 'chat.talk.conciel.call',
+        'channelName': 'Conciel Call',
+        'notificationTitle': 'Conciel is running in the background',
+        'notificationIcon': 'mipmap/ic_notification_launcher',
+      },
+      'additionalPermissions': [''],
+    },
+  };
+
+  Map<String, dynamic> get callOptions => <String, dynamic>{
+        'alertTitle': 'Permissions required',
+        'alertDescription':
+            'Allow Conciel to register as a calling account? This will allow calls to be handled by the native android dialer.',
+        'cancelButton': 'Cancel',
+        'okButton': 'ok',
+        // Required to get audio in background when using Android 11
+        'foregroundService': {
+          'channelId': 'chat.talk.conciel.call',
+          'channelName': 'Conciel Call',
+          'notificationTitle': 'Conciel is running in the background',
+          'notificationIcon': 'mpimap/ic_notification',
+        },
+        'additionalPermissions': [''],
+      };
+
+  bool setupDone = false;
+
+  Future<void> showCallkitIncoming(CallSession call) async {
+    setupDone = await hasPhoneAccountEnabled;
+    if (setupDone) {
+    _callKeep = CallKeep.instance;
+    await displayIncomingCall(call);
+    call.onCallStateChanged.stream.listen((state) {
+      if (state == CallState.kEnded) {
+        _callKeep.endAllCalls();
+      }
+    });
+    call.onCallEventChanged.stream.listen(
+      (event) {
+        if (event == CallEvent.kLocalHoldUnhold) {
+          Logs().i(
+            'Call hold event: local ${call.localHold}, remote ${call.remoteOnHold}',
+          );
+        }
+      },
+    );}
+  }
+
+  void removeCall(String? callUUID) {
+    calls.remove(callUUID);
+  }
+
+  void addCall(String? callUUID, CallKeeper callKeeper) {
+    if (calls.containsKey(callUUID)) return;
+    calls[callUUID] = callKeeper;
+  }
+
+  void setCallHeld(String? callUUID, bool? held) {
+    calls[callUUID]!.held = held;
+  }
+
+  void setCallMuted(String? callUUID, bool? muted) {
+    calls[callUUID]!.muted = muted;
+  }
+
+  void didDisplayIncomingCall(CallKeepIncomingConfig event) {
+    final callUUID = event.uuid;
+    final number = event.handle;
+    Logs().v('[displayIncomingCall] $callUUID number: $number');
+//     addCall(callUUID, CallKeeper(CallKeepManager._instance , this.null ));
+  }
+
+/*
+    void onPushKitToken(CallKeepPushKitToken event) {
+    Logs().v('[onPushKitToken] token => ${event.token}');
+  }
+*/
+  Future<void> initialize(Function? callback) async {
+
+  CallKeep.instance.onEvent.listen((event) async {
+    // TODO: Implement other events
+    if (event == null) return;
+    switch (event.type) {
+      case CallKeepEventType.callIncoming:break;
+      case CallKeepEventType.callStart: break;
+        case CallKeepEventType.callAccept:
+        final data = event.data as CallKeepCallData;
+        print('call answered: ${data.toMap()}');
+        answerCall(event);
+//        VRouter.pushNamedIfNotCurrent(AppRoute.callingPage, args: data.toMap());
+        if (callback != null) callback.call(event);
+        break;
+        case CallKeepEventType.callDecline:
+        final data = event.data as CallKeepCallData;
+        print('call declined: ${data.toMap()}');
+        endCall(event);
+//        await requestHttp("ACTION_CALL_DECLINE_FROM_DART");
+        if (callback != null) callback.call(data);
+        break;
+        case CallKeepEventType.callEnded: break;
+        case CallKeepEventType.callTimedOut: break;
+       
+       case CallKeepEventType.missedCallback: Platform.isAndroid ? null : null;
+
+        default:
+        break;
+    }
+});
+
+/*
+    _callKeep.on(CallKeepPerformAnswerCallAction(), answerCall);
+    _callKeep.on(CallKeepDidPerformDTMFAction(), didPerformDTMFAction);
+    _callKeep.on(
+      CallKeepDidReceiveStartCallAction(),
+      didReceiveStartCallAction,
+    );
+    _callKeep.on(CallKeepDidToggleHoldAction(), didToggleHoldCallAction);
+    _callKeep.on(
+      CallKeepDidPerformSetMutedCallAction(),
+      didPerformSetMutedCallAction,
+    );
+    _callKeep.on(CallKeepPerformEndCallAction(), endCall);
+    _callKeep.on(CallKeepPushKitToken(), onPushKitToken);
+    _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
+*/
+    Logs().i('[VOIP] Initialized');
+  }
+
+  Future<void> hangup(String callUUID) async {
+    await _callKeep.endCall(callUUID);
+    removeCall(callUUID);
+  }
+
+  Future<void> reject(String callUUID) async {
+    await _callKeep.endCall(callUUID);
+  }
+
+  Future<void> answer(String? callUUID) async {
+    final keeper = calls[callUUID]!;
+    if (!keeper.connected) {
+      await _callKeep.answerIncomingCall(callUUID!);
+      keeper.connected = true;
+    }
+  }
+
+  Future<void> setOnHold(String callUUID, bool held) async {
+    await _callKeep.setOnHold(callUUID, held);
+    setCallHeld(callUUID, held);
+  }
+
+  Future<void> setMutedCall(String callUUID, bool muted) async {
+    await _callKeep.setMutedCall(callUUID, muted);
+    setCallMuted(callUUID, muted);
+  }
+
+  Future<void> updateDisplay(String callUUID) async {
+    // Workaround because Android doesn't display well displayName, se we have to switch ...
+    if (isIOS) {
+      await _callKeep.updateDisplay(
+        callUUID,
+        displayName: 'New Name',
+        handle: callUUID,
+      );
+    } else {
+      await _callKeep.updateDisplay(
+        callUUID,
+        displayName: callUUID,
+        handle: 'New Name',
+      );
+    }
+  }
+
+  Future<CallKeeper> displayIncomingCall(CallSession call) async {
+    final callKeeper = CallKeeper(this, call);
+    addCall(call.callId, callKeeper);
+    await _callKeep.displayIncomingCall(
+      CallKeepIncomingConfig.fromBaseConfig(
+        config: CallKeepBase.instance.callKeepBaseConfig,
+        uuid: call.callId,
+        callerName: '${call.room.getLocalizedDisplayname()} (ConcielTalk)',
+        contentTitle: '${call.room.getLocalizedDisplayname()} (ConcielTalk)',
+        handle: call.callId,
+        hasVideo: call.type == CallType.kVideo,
+        avatar: call.room.avatar.toString(),
+        duration: 3600,
+      ),
+    );
+    return callKeeper;
+  }
+
+  Future<void> checkoutPhoneAccountSetting(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      useRootNavigator: false,
+      builder: (_) => AlertDialog(
+        title: Text(
+          L10n.of(context)!.callingPermissions,
+          style: TextStyle(fontSize: 20),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              visualDensity: VisualDensity.comfortable,
+              dense: true,
+              onTap: () => openCallingAccountsPage(context),
+              title: Text(L10n.of(context)!.callingAccount),
+              subtitle: Text(L10n.of(context)!.callingAccountDetails),
+              trailing: const Icon(Icons.phone),
+            ),
+            const Divider(),
+            ListTile(
+              visualDensity: VisualDensity.comfortable,
+              dense: true,
+              onTap: () => FlutterForegroundTask.openSystemAlertWindowSettings(
+                forceOpen: true,
+              ),
+              title: Text(L10n.of(context)!.appearOnTop),
+              subtitle: Text(L10n.of(context)!.appearOnTopDetails),
+              trailing: const Icon(Icons.file_upload_rounded),
+            ),
+            const Divider(),
+            ListTile(
+              visualDensity: VisualDensity.comfortable,
+              dense: true,
+              onTap: () => openAppSettings(),
+              title: Text(L10n.of(context)!.otherCallingPermissions),
+              trailing: const Icon(Icons.mic),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<bool> requestReadPhoneNumbersPermission() async {
+    try {
+      bool readPhPerms = await concielPlatform
+          .invokeMethod('requestReadPhoneNumbersPermission');
+      return readPhPerms;
+    } on PlatformException catch (e) {
+      Logs().e('Failed to request READ_PHONE_NUMBERS permission: ${e.message}');
+      return false;
+    }
+  }
+
+  void openCallingAccountsPage(BuildContext context) async {
+    print('jumped into the calling accounts page');
+    setupDone = await hasPhoneAccountEnabled;
+    
+    _callKeep.
+    await _callKeep.setup(
+      context,
+      callSetup,
+    );
+
+    Logs().e('Has phone account - ${setupDone.toString()}');
+
+    if (!hasPhoneAccount) {
+      Logs().e('Checking for default phone account');
+      print(callSetup);
+      final defaultPhone = await _callKeep.hasDefaultPhoneAccount(
+            context,
+            callOptions,
+          ) ??
+          true;
+
+      Logs().e('Has default phone account - ${defaultPhone.toString()}');
+      print('does it have a default phone: $defaultPhone');
+    } else {
+      await _callKeep.openPhoneAccounts();
+      print('it now has a specific phone account: ???');
+    }
+  }
+
+  /// CallActions.
+  Future<void> answerCall(CallKeepPerformAnswerCallAction event) async {
+    final callUUID = event.callUUID;
+    final keeper = calls[event.callUUID]!;
+    if (!keeper.connected) {
+      Logs().e('answered');
+      // Answer Call
+      keeper.call.answer();
+      keeper.connected = true;
+    }
+    Timer(const Duration(seconds: 1), () {
+      _callKeep.setCurrentCallActive(callUUID!);
+    });
+  }
+
+  Future<void> endCall(CallKeepPerformEndCallAction event) async {
+    final keeper = calls[event.callUUID];
+    keeper?.call.hangup();
+    removeCall(event.callUUID);
+  }
+
+  Future<void> didPerformDTMFAction(CallKeepDidPerformDTMFAction event) async {
+    final keeper = calls[event.callUUID]!;
+    keeper.call.sendDTMF(event.digits!);
+  }
+
+  Future<void> didReceiveStartCallAction(
+    CallKeepDidReceiveStartCallAction event,
+  ) async {
+    if (event.handle == null) {
+      // @TODO: sometime we receive `didReceiveStartCallAction` with handle` undefined`
+      return;
+    }
+    final callUUID = event.callUUID!;
+    if (event.callUUID == null) {
+      final call =
+          await _voipPlugin!.voip.inviteToCall(event.handle!, CallType.kVideo);
+      addCall(callUUID, CallKeeper(this, call));
+    }
+    await _callKeep.startCall(callUUID, event.handle!, event.handle!);
+    Timer(const Duration(seconds: 1), () {
+      _callKeep.setCurrentCallActive(callUUID);
+    });
+  }
+
+  Future<void> didPerformSetMutedCallAction(
+    CallKeepDidPerformSetMutedCallAction event,
+  ) async {
+    final keeper = calls[event.callUUID];
+    if (event.muted!) {
+      keeper!.call.setMicrophoneMuted(true);
+    } else {
+      keeper!.call.setMicrophoneMuted(false);
+    }
+    setCallMuted(event.callUUID, event.muted);
+  }
+
+  Future<void> didToggleHoldCallAction(
+    CallKeepDidToggleHoldAction event,
+  ) async {
+    final keeper = calls[event.callUUID];
+    if (event.hold!) {
+      keeper!.call.setRemoteOnHold(true);
+    } else {
+      keeper!.call.setRemoteOnHold(false);
+    }
+    setCallHeld(event.callUUID, event.hold);
+  }
+}

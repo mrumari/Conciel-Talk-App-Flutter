@@ -1,0 +1,11 @@
+{
+  "application_name": "Conciel Talk",
+  "application_welcome_message": null,
+  "default_port": "8448",
+  "defaul_domain": "conciel.space",
+  "web_base_url": "https://conciel.ch",
+  "privacy_url": "https://conciel.ch/impressum",
+  "render_html": false,
+  "hide_redacted_events": false,
+  "hide_unknown_events": false
+}

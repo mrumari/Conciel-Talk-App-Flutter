@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "355943116384",
+    "project_id": "conciel-talk",
+    "storage_bucket": "conciel-talk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355943116384:android:7339fddfeba48e68711d05",
+        "android_client_info": {
+          "package_name": "chat.conciel.concieltalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355943116384-9kl5r817hn5qtkvi51trfa2euqp0o261.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYIEQnV1qraO7u-pinOVGQVCBpblEveWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355943116384-9kl5r817hn5qtkvi51trfa2euqp0o261.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

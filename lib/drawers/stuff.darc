@@ -1,0 +1,33 @@
+                        value: 'file',
+                            child: Icon(Icons.attachment_outlined),
+                        value: 'image',
+                            child: Icon(Icons.image_outlined),
+                          value: 'camera',
+                              child: Icon(Icons.camera_alt_outlined),
+                          value: 'camera-video',
+                              child: Icon(Icons.videocam_outlined),
+                          value: 'sticker',
+                              child: Icon(Icons.emoji_emotions_outlined),
+                          value: 'location',
+                              child: Icon(Icons.gps_fixed_outlined),
+
+  void onAddPopupMenuButtonSelected(String choice) {
+    if (choice == 'file') {
+      sendFileAction();
+    }
+    if (choice == 'image') {
+      sendImageAction();
+    }
+    if (choice == 'camera') {
+      openCameraAction();
+    }
+    if (choice == 'camera-video') {
+      openVideoCameraAction();
+    }
+    if (choice == 'sticker') {
+      sendStickerAction();
+    }
+    if (choice == 'location') {
+      sendLocationAction();
+    }
+  }
